@@ -23,8 +23,7 @@ st.markdown("Compare, evaluate, and tune machine learning models interactively."
 sample_datasets = {
     "Iris (default)": "data/iris_sample.csv",
     "Titanic": "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
-    "Wine": "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
-
+    "Wine": "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
 }
 selected_dataset = st.selectbox("📂 Choose a sample dataset or upload your own:", list(sample_datasets.keys()))
 uploaded_file = st.file_uploader("Or upload your own CSV file", type=["csv"])
@@ -45,17 +44,20 @@ if uploaded_file:
 
 else:
     dataset_path = sample_datasets[selected_dataset]
-    df = pd.read_csv(dataset_path)
 
-    # Infer default target column based on dataset
-    if selected_dataset == "Iris (default)":
-        target_column = "species"
-    elif selected_dataset == "Titanic":
-        target_column = "Survived"
     if selected_dataset == "Wine":
         df = pd.read_csv(dataset_path, sep=";")
+        target_column = "quality"
+    elif selected_dataset == "Titanic":
+        df = pd.read_csv(dataset_path)
+        target_column = "Survived"
+    elif selected_dataset == "Iris (default)":
+        df = pd.read_csv(dataset_path)
+        target_column = "species"
     else:
         df = pd.read_csv(dataset_path)
+        target_column = df.columns[-1]
+
 
     st.info(f"Using sample dataset: {selected_dataset}")
     st.dataframe(df.head())
