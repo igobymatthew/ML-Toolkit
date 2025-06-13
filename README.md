@@ -2,7 +2,6 @@
 
 [![Streamlit App](https://img.shields.io/badge/Live%20App-Streamlit-brightgreen?logo=streamlit)](https://ml-toolkit-ouzbcccswpncawcypvhsz7.streamlit.app/)
 
-
 A powerful, modular, and interactive dashboard for comparing machine learning models, evaluating performance, explaining predictions, and tuning hyperparameters — all in one place.
 
 Built using **Python**, **Streamlit**, and **scikit-learn**. Designed for learning, showcasing, and real-world ML development.
@@ -109,6 +108,7 @@ docker run -p 8501:8501 ml-toolkit
 
 ## 📚 Blog Posts
 
+- [🧰 Feature-by-Feature Toolkit Guide](blog_feature_walkthrough.md)
 - [🔍 Comparing ML Models](blog_demo_toolkit.md)
 - [🔬 SHAP Explainability](blog_shap_explainability.md)
 - [🚀 Streamlit Deployment Guide](blog_deploy_streamlit_cloud.md)
