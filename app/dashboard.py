@@ -38,7 +38,8 @@ if uploaded_file:
         X = pd.get_dummies(X)
         y = pd.factorize(y)[0]
         st.success(f"Using uploaded dataset with shape {X.shape}")
-    else: dataset_path = sample_datasets[selected_dataset]
+elif selected_dataset:
+    dataset_path = sample_datasets[selected_dataset]
     df = pd.read_csv(dataset_path)
     if selected_dataset == "Iris (default)":
         target_column = "species"
@@ -118,13 +119,13 @@ if 'Random Forest' in selected_models:
             for i, class_values in enumerate(shap_values):
                 try:
                     st.markdown(f"**SHAP Summary for Class {i}**")
-                    shap.summary_plot(class_values, X_test, plot_type="bar")
+                    shap.summary_plot(class_values, X_test, show=False)
                     fig = plt.gcf()
                     st.pyplot(fig)
                 except Exception as e:
                     st.warning(f"Could not plot SHAP for class {i}: {str(e)}")
         else:
-            shap.summary_plot(shap_values, X_test, plot_type="bar")
+            shap.summary_plot(shap_values, X_test, show=False)
             fig = plt.gcf()
             st.pyplot(fig)
 
