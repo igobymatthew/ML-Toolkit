@@ -23,7 +23,8 @@ st.markdown("Compare, evaluate, and tune machine learning models interactively."
 sample_datasets = {
     "Iris (default)": "data/iris_sample.csv",
     "Titanic": "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
-    "Wine": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/wine.csv"
+    "Wine": "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv",
+
 }
 selected_dataset = st.selectbox("📂 Choose a sample dataset or upload your own:", list(sample_datasets.keys()))
 uploaded_file = st.file_uploader("Or upload your own CSV file", type=["csv"])
