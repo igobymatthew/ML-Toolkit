@@ -108,10 +108,10 @@ docker run -p 8501:8501 ml-toolkit
 
 ## 📚 Blog Posts
 
-- [🧰 Feature-by-Feature Toolkit Guide](blog_feature_walkthrough.md)
-- [🔍 Comparing ML Models](blog_demo_toolkit.md)
-- [🔬 SHAP Explainability](blog_shap_explainability.md)
-- [🚀 Streamlit Deployment Guide](blog_deploy_streamlit_cloud.md)
+- [🧰 Feature-by-Feature Toolkit Guide](docs/blog_feature_walkthrough.md)
+- [🔍 Comparing ML Models](docs/blog_demo_toolkit.md)
+- [🔬 SHAP Explainability](docs/blog_shap_explainability.md)
+- [🚀 Streamlit Deployment Guide](docs/blog_deploy_streamlit_cloud.md)
 
 ---
 
