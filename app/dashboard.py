@@ -19,13 +19,6 @@ st.markdown("Compare, evaluate, and tune machine learning models interactively."
 
 # Upload or load data
 # Select a sample dataset or upload your own
-sample_datasets = {
-    "Iris (default)": "data/iris_sample.csv",
-    "Titanic": "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
-    "Wine": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/wine.csv"
-}
-selected_dataset = st.selectbox("📂 Choose a sample dataset or upload your own:", list(sample_datasets.keys()))
-
 # Dataset selection
 sample_datasets = {
     "Iris (default)": "data/iris_sample.csv",
@@ -80,7 +73,6 @@ if len(df) < 5:
 
 # Train/test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
 
 model_options = {
     'Logistic Regression': LogisticRegression(max_iter=200),
