@@ -1,7 +1,4 @@
-
-
 # 🧠 ML Model Comparison Toolkit
-
 A powerful, modular, and interactive dashboard for comparing machine learning models, evaluating performance, explaining predictions, and tuning hyperparameters — all in one place.
 
 Built using **Python**, **Streamlit**, and **scikit-learn**. Designed for learning, showcasing, and real-world ML development.
@@ -41,29 +38,29 @@ Built using **Python**, **Streamlit**, and **scikit-learn**. Designed for learni
 ## 🗂 Project Structure
 
 ```
-ml-model-comparison-toolkit/
-├── app/                      # Streamlit app
+ML-Toolkit/
+├── app/                          # Streamlit app
 │   └── dashboard.py
-├── data/                     # Sample dataset
+├── data/                         # Sample dataset
 │   └── iris_sample.csv
-├── notebooks/                # Interactive exploration notebooks
+├── notebooks/                    # Interactive exploration notebooks
 │   ├── model_testing.ipynb
 │   └── demo_usage.ipynb
-├── src/                      # Modular ML utilities
+├── src/                          # Modular ML utilities
 │   ├── preprocess.py
 │   ├── train_models.py
 │   └── evaluate_models.py
-├── .streamlit/               # Streamlit configuration
+├── .streamlit/                   # Streamlit configuration
 │   └── config.toml
-├── Dockerfile                # Docker config
-├── .dockerignore             # Docker exclusions
-├── requirements.txt          # Python dependencies
-├── LICENSE                   # MIT License
-├── index.html                # GitHub Pages landing page
-├── README.md                 # This file
-├── project_board.md          # GitHub project tasks
-├── blog_demo_toolkit.md      # Blog post: Comparing Models
-├── blog_shap_explainability.md # Blog post: SHAP Explanations
+├── Dockerfile                    # Docker config
+├── .dockerignore                 # Docker exclusions
+├── requirements.txt              # Python dependencies
+├── LICENSE                       # MIT License
+├── index.html                    # GitHub Pages landing page
+├── README.md                     # This file
+├── project_board.md              # GitHub project tasks
+├── blog_demo_toolkit.md          # Blog post: Comparing Models
+├── blog_shap_explainability.md   # Blog post: SHAP Explanations
 └── blog_deploy_streamlit_cloud.md # Blog post: Streamlit Deployment
 ```
 
@@ -133,7 +130,7 @@ Davenport University
 
 ## 🧠 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Powered%20by-Streamlit-red)](https://streamlit.io/)
