@@ -38,8 +38,7 @@ if uploaded_file:
         X = pd.get_dummies(X)
         y = pd.factorize(y)[0]
         st.success(f"Using uploaded dataset with shape {X.shape}")
-else:
-    dataset_path = sample_datasets[selected_dataset]
+    else: dataset_path = sample_datasets[selected_dataset]
     df = pd.read_csv(dataset_path)
     if selected_dataset == "Iris (default)":
         target_column = "species"
