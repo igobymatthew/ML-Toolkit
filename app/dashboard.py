@@ -52,10 +52,10 @@ else:
         target_column = "species"
     elif selected_dataset == "Titanic":
         target_column = "Survived"
-    elif selected_dataset == "Wine":
-        target_column = "quality" if "quality" in df.columns else df.columns[-1]
+    if selected_dataset == "Wine":
+        df = pd.read_csv(dataset_path, sep=";")
     else:
-        target_column = df.columns[-1]
+        df = pd.read_csv(dataset_path)
 
     st.info(f"Using sample dataset: {selected_dataset}")
     st.dataframe(df.head())
