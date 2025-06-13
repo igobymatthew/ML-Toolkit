@@ -118,13 +118,13 @@ if 'Random Forest' in selected_models:
             for i, class_values in enumerate(shap_values):
                 try:
                     st.markdown(f"**SHAP Summary for Class {i}**")
-                    shap.summary_plot(class_values, X_test, show=False)
+                    shap.summary_plot(class_values, X_test, plot_type="bar")
                     fig = plt.gcf()
                     st.pyplot(fig)
                 except Exception as e:
                     st.warning(f"Could not plot SHAP for class {i}: {str(e)}")
         else:
-            shap.summary_plot(shap_values, X_test, show=False)
+            shap.summary_plot(shap_values, X_test, plot_type="bar")
             fig = plt.gcf()
             st.pyplot(fig)
 
