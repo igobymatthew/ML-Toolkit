@@ -58,17 +58,17 @@ else:
         df = pd.read_csv(dataset_path)
         target_column = df.columns[-1]
 
-
     st.info(f"Using sample dataset: {selected_dataset}")
     st.dataframe(df.head())
 
+    # ✅ Safely transform the data here
     X = df.drop(columns=[target_column])
     y = df[target_column]
     X = pd.get_dummies(X)
     X = X.fillna(X.mean(numeric_only=True)).fillna(0)
     y = pd.factorize(y)[0]
     st.success(f"Using sample dataset with shape {X.shape}")
-
+    
 # Abort if dataset is too small
 if len(df) < 5:
     st.error("Dataset is too small to split into training and test sets. Please upload more data.")
