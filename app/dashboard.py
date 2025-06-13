@@ -26,49 +26,61 @@ sample_datasets = {
 }
 selected_dataset = st.selectbox("📂 Choose a sample dataset or upload your own:", list(sample_datasets.keys()))
 
+# Dataset selection
+sample_datasets = {
+    "Iris (default)": "data/iris_sample.csv",
+    "Titanic": "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
+    "Wine": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/wine.csv"
+}
+selected_dataset = st.selectbox("📂 Choose a sample dataset or upload your own:", list(sample_datasets.keys()))
 uploaded_file = st.file_uploader("Or upload your own CSV file", type=["csv"])
+
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
     st.write("📄 Uploaded Dataset Preview:")
     st.dataframe(df.head())
+
     target_column = st.selectbox("🎯 Select the target column", options=df.columns)
     if target_column:
         X = df.drop(columns=[target_column])
         y = df[target_column]
         X = pd.get_dummies(X)
+        X = X.fillna(X.mean(numeric_only=True)).fillna(0)
         y = pd.factorize(y)[0]
         st.success(f"Using uploaded dataset with shape {X.shape}")
-elif selected_dataset:
+
+else:
     dataset_path = sample_datasets[selected_dataset]
     df = pd.read_csv(dataset_path)
+
+    # Infer default target column based on dataset
     if selected_dataset == "Iris (default)":
         target_column = "species"
     elif selected_dataset == "Titanic":
         target_column = "Survived"
     elif selected_dataset == "Wine":
         target_column = "quality" if "quality" in df.columns else df.columns[-1]
+    else:
+        target_column = df.columns[-1]
 
     st.info(f"Using sample dataset: {selected_dataset}")
     st.dataframe(df.head())
-    X = df.drop(columns=[target_column])
-    y = df[target_column]
-    X = pd.get_dummies(X)
-    y = pd.factorize(y)[0]
-    st.success(f"Using uploaded dataset with shape {X.shape}")
-else:
-    df = pd.read_csv("data/iris_sample.csv")
-    target_column = "species"
-    X = df.drop(columns=[target_column])
-    y = df[target_column]
-    X = pd.get_dummies(X)
-    y = pd.factorize(y)[0]
-    st.info("Using built-in sample dataset (Iris)")
 
+    X = df.drop(columns=[target_column])
+    y = df[target_column]
+    X = pd.get_dummies(X)
+    X = X.fillna(X.mean(numeric_only=True)).fillna(0)
+    y = pd.factorize(y)[0]
+    st.success(f"Using sample dataset with shape {X.shape}")
+
+# Abort if dataset is too small
 if len(df) < 5:
     st.error("Dataset is too small to split into training and test sets. Please upload more data.")
     st.stop()
 
+# Train/test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 
 model_options = {
     'Logistic Regression': LogisticRegression(max_iter=200),
