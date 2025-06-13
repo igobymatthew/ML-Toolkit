@@ -157,12 +157,16 @@ for name in selected_models:
         st.warning(f"{name} cross-validation failed: {e}")
 
 if cv_results:
-    st.dataframe(pd.DataFrame(cv_results).set_index("Model").style.format({
-        "CV Accuracy (mean)": "{:.2%}",
-        "CV Accuracy (std)": "{:.2%}",
-        "CV F1 Score (mean)": "{:.2%}",
-        "CV F1 Score (std)": "{:.2%}"
-    }))
+    df_cv = pd.DataFrame(cv_results)
+    if not df_cv.empty:
+        st.dataframe(df_cv.set_index("Model").style.format({
+            "CV Accuracy (mean)": "{:.2%}",
+            "CV Accuracy (std)": "{:.2%}",
+            "CV F1 Score (mean)": "{:.2%}",
+            "CV F1 Score (std)": "{:.2%}"
+        }), use_container_width=True)
+    else:
+        st.info("No cross-validation results to display.")
 
 # GridSearchCV Tuning
 st.subheader("Hyperparameter Tuning (GridSearchCV)")
@@ -190,6 +194,9 @@ for name in selected_models:
 
 if grid_results:
     df_grid = pd.DataFrame(grid_results)
-    st.dataframe(df_grid.set_index("Model").style.format({
-        "Best CV Accuracy": "{:.2%}"
-    }))
+    if not df_grid.empty:
+        st.dataframe(df_grid.set_index("Model").style.format({
+            "Best CV Accuracy": "{:.2%}"
+        }), use_container_width=True)
+    else:
+        st.info("No GridSearchCV results to display.")
