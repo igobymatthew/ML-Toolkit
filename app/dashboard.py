@@ -9,10 +9,7 @@ import seaborn as sns
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
+from src.train_models import get_models
 
 st.title("ML Model Comparison Toolkit")
 st.markdown("Compare, evaluate, and tune machine learning models interactively.")
@@ -71,12 +68,7 @@ else:
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model_options = {
-    'Logistic Regression': LogisticRegression(max_iter=200),
-    'Decision Tree': DecisionTreeClassifier(),
-    'Random Forest': RandomForestClassifier(),
-    'SVM': SVC(probability=True)
-}
+model_options = get_models()
 
 selected_models = st.multiselect("Select models to compare:", options=list(model_options.keys()), default=list(model_options.keys()))
 
@@ -111,29 +103,40 @@ else:
 
 # SHAP Explainability
 st.subheader("SHAP Explainability (Tree-Based Models Only)")
-if 'Random Forest' in selected_models:
+tree_based_models = [model for model in selected_models if model in ['Decision Tree', 'Random Forest', 'XGBoost', 'LightGBM']]
+if tree_based_models:
+    model_to_explain = st.selectbox("Select a model to explain with SHAP:", tree_based_models)
+    st.info(f"Generating SHAP plot for **{model_to_explain}**. This may take a moment...")
     try:
-        explainer = shap.TreeExplainer(model_options['Random Forest'])
+        # Ensure the model is fitted before explaining
+        model = model_options[model_to_explain]
+        if not hasattr(model, 'classes_'):
+             model.fit(X_train, y_train)
+
+        explainer = shap.TreeExplainer(model)
         shap_values = explainer.shap_values(X_test)
 
         if isinstance(shap_values, list):
             for i, class_values in enumerate(shap_values):
                 try:
                     st.markdown(f"**SHAP Summary for Class {i}**")
+                    fig = plt.figure()
                     shap.summary_plot(class_values, X_test, show=False)
-                    fig = plt.gcf()
                     st.pyplot(fig)
+                    plt.close(fig)
                 except Exception as e:
                     st.warning(f"Could not plot SHAP for class {i}: {str(e)}")
         else:
+            fig = plt.figure()
             shap.summary_plot(shap_values, X_test, show=False)
-            fig = plt.gcf()
             st.pyplot(fig)
+            plt.close(fig)
 
     except Exception as e:
-        st.error(f"SHAP could not be generated: {str(e)}")
+        st.error(f"SHAP could not be generated for {model_to_explain}: {str(e)}")
 else:
-    st.info("Select 'Random Forest' to view SHAP explanations.")
+    st.info("Select a tree-based model (e.g., Random Forest, XGBoost) to view SHAP explanations.")
+
 
 # Confusion Matrix & ROC
 st.subheader("Confusion Matrix & ROC Curve (Binary or Simplified Classes Only)")
@@ -201,7 +204,9 @@ param_grids = {
     "Logistic Regression": {"C": [0.1, 1.0, 10.0]},
     "Decision Tree": {"max_depth": [3, 5, 10]},
     "Random Forest": {"n_estimators": [50, 100], "max_depth": [3, 5, None]},
-    "SVM": {"C": [0.1, 1.0, 10.0], "kernel": ["linear", "rbf"]}
+    "SVM": {"C": [0.1, 1.0, 10.0], "kernel": ["linear", "rbf"]},
+    "XGBoost": {"n_estimators": [50, 100], "max_depth": [3, 5], "learning_rate": [0.05, 0.1]},
+    "LightGBM": {"n_estimators": [50, 100], "max_depth": [3, 5], "learning_rate": [0.05, 0.1]}
 }
 
 for name in selected_models:
