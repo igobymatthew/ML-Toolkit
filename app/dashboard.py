@@ -11,8 +11,37 @@ from sklearn.model_selection import train_test_split, cross_val_score, GridSearc
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc
 from src.train_models import get_models
 
-st.title("ML Model Comparison Toolkit")
-st.markdown("Compare, evaluate, and tune machine learning models interactively.")
+st.set_page_config(page_title="ML Model Comparison Toolkit", page_icon="🤖", layout="wide")
+
+st.markdown(
+    """
+    <style>
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+    }
+    html, body, [class*="css"] {
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      font-family: 'Inter', sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    "<h1 style='font-size:2.25rem;font-weight:700;margin-bottom:0.5rem;'>ML Model Comparison Toolkit</h1>",
+    unsafe_allow_html=True,
+)
+st.markdown(
+    "<p style='color:hsl(var(--muted-foreground));margin-bottom:1.5rem;'>Compare, evaluate, and tune machine learning models interactively.</p>",
+    unsafe_allow_html=True,
+)
 
 # Upload or load data
 # Select a sample dataset or upload your own

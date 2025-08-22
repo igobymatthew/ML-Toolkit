@@ -1,75 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ML Model Comparison Toolkit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))',
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))',
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))',
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))',
+            },
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    body {
-      background-color: #111;
-      color: #eee;
-      font-family: 'Helvetica Neue', sans-serif;
-      padding: 40px;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #f77c00;
-      font-size: 2.5rem;
-    }
-    a {
-      color: #f77c00;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .button {
-      display: inline-block;
-      padding: 12px 24px;
-      margin: 16px 0;
-      background-color: #f77c00;
-      color: #111;
-      font-weight: bold;
-      border-radius: 4px;
-      text-decoration: none;
-    }
-    .button:hover {
-      background-color: #ffa040;
-    }
-    code {
-      background-color: #222;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9rem;
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+      --destructive: 0 72.2% 50.6%;
+      --destructive-foreground: 210 40% 98%;
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+      --radius: 0.5rem;
     }
   </style>
 </head>
-<body>
-  <h1>ML Model Comparison Toolkit</h1>
-  <p><em>Built by Matthew Ballard, Graduate Student – AI Engineering, Davenport University</em></p>
+<body class="min-h-screen bg-background text-foreground antialiased">
+  <div class="container mx-auto max-w-3xl p-8 space-y-12">
+    <header class="space-y-2">
+      <h1 class="text-4xl font-bold tracking-tight">ML Model Comparison Toolkit</h1>
+      <p class="text-muted-foreground">Built by Matthew Ballard, Graduate Student – AI Engineering, Davenport University</p>
+    </header>
 
-  <p>This toolkit allows you to upload datasets, compare machine learning models, evaluate performance, tune hyperparameters, and visualize explanations with SHAP.</p>
+    <section class="space-y-6">
+      <p>This toolkit allows you to upload datasets, compare machine learning models, evaluate performance, tune hyperparameters, and visualize explanations with SHAP.</p>
+      <a href="https://your-streamlit-app-url" target="_blank" class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">Launch App</a>
+    </section>
 
-  <a class="button" href="https://your-streamlit-app-url" target="_blank">🌐 Launch App</a>
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">Explore the Project</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><a href="https://github.com/your-username/ml-model-comparison-toolkit" target="_blank" class="text-primary underline-offset-4 hover:underline">GitHub Repository</a></li>
+        <li><a href="blog_demo_toolkit.md" target="_blank" class="text-primary underline-offset-4 hover:underline">Blog Post: Comparing Models</a></li>
+        <li><a href="blog_shap_explainability.md" target="_blank" class="text-primary underline-offset-4 hover:underline">Blog Post: SHAP Explainability</a></li>
+        <li><a href="blog_deploy_streamlit_cloud.md" target="_blank" class="text-primary underline-offset-4 hover:underline">Blog Post: Streamlit Deployment</a></li>
+      </ul>
+    </section>
 
-  <h2>Explore the Project</h2>
-  <ul>
-    <li><a href="https://github.com/your-username/ml-model-comparison-toolkit" target="_blank">GitHub Repository</a></li>
-    <li><a href="blog_demo_toolkit.md" target="_blank">Blog Post: Comparing Models</a></li>
-    <li><a href="blog_shap_explainability.md" target="_blank">Blog Post: SHAP Explainability</a></li>
-    <li><a href="blog_deploy_streamlit_cloud.md" target="_blank">Blog Post: Streamlit Deployment</a></li>
-  </ul>
-
-  <h2>Quick Start</h2>
-  <p>Clone the repository and run locally:</p>
-  <pre><code>git clone https://github.com/your-username/ml-model-comparison-toolkit.git
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">Quick Start</h2>
+      <pre class="bg-muted rounded-lg p-4 text-sm overflow-x-auto"><code>git clone https://github.com/your-username/ml-model-comparison-toolkit.git
 cd ml-model-comparison-toolkit
 pip install -r requirements.txt
 streamlit run app/dashboard.py</code></pre>
+    </section>
 
-  <h2>License</h2>
-  <p>This project is licensed under the <a href="LICENSE" target="_blank">MIT License</a>.</p>
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold tracking-tight">License</h2>
+      <p>This project is licensed under the <a href="LICENSE" target="_blank" class="text-primary underline-offset-4 hover:underline">MIT License</a>.</p>
+    </section>
+  </div>
 </body>
 </html>
